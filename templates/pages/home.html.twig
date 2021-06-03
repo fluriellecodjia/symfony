@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block body %}
+ <div class="jumbotron text-center">
+<h1> DO FEAT WITH GOD</h1>
+<p> Plateform de développement par la jeunesse pour la jeunesse</p>
+</div>
+    <div class="container">
+        <h2>Les derniers services <h2>
+            <div class="row-flex">
+                {% for Programme in service  %}
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-Body">
+                                <h5 class="card-title">
+                                  <a href="{{path('service.show' , {id: Programme.id, slug: Programme.slug})}}">{{Programme.Title}}<a/>
+                                </h5>
+                                <p class="card-text">{{Programme.nom}} {{Programme.description}} <p>
+                                   <div class="text-primary"> {{Programme.MomentAt |date("m/d/y")}}</div>
+                            </div>
+                        </div>
+                    </div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

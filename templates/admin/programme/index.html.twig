@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block title 'Gérer les biens' %}
+{% block body %}
+ <div class="container mt-4">
+<h1>Gérer les services </h1>
+{% for message in app.flashes('success') %}
+ <div class="alert alert-success">
+    {{message}}
+     </div>
+{% endfor %}
+ <div class="text-right">
+      <a href="{{path('admin.program.new')}}" class="btn btn-primary">Créer un nouveau service</a>
+     </div>
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for Programme in Programme  %}
+                   
+       
+    <tr>
+        <td>{{Programme.title}}</td>
+        <td>
+            <a href="{{path('admin.program.edit', {id: Programme.id})}}" class="btn btn-secondary">Editer</a>
+              <form method="post" action="{{path('admin.program.delete', {id: Programme.id})}}" style="display: inline-block" onSubmit="return confirm('Voulez vous vraiment supprimer cet élément??')">  
+              <input type="hidden" name="method" value="DELETE">
+              <input type="hidden" name="token" value="{{csrf_token('delete' ~ Programme.id)}}">
+              <button class="btn btn-danger">Supprimer</button>
+                </form>
+        </td>
+    </tr>
+    </tbody>
+     {% endfor %}
+</table>
+</div>
+    
+     </div>
+
+
+{% endblock %}
